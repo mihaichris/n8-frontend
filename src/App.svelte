@@ -1,24 +1,15 @@
 <script>
-  import TailwindCss from "./TailwindCss.svelte";
-  import AppCss from "./style/AppCss.svelte";
-  export let name;
+  import { Router, Route } from "svelte-routing";
+
+  import Navbar from "./layout/Navbar.svelte";
+  import Home from "./pages/Home.svelte";
+  import Status from "./pages/Status.svelte";
 </script>
 
-<TailwindCss />
-<AppCss />
-
-<main>
-  <div id="cover">
-  <form method="get" action="">
-    <div class="tb">
-      <div class="td"><input type="text" placeholder="Search" required></div>
-      <div class="td" id="s-cover">
-        <button type="submit">
-          <div id="s-circle"></div>
-          <span></span>
-        </button>
-      </div>
-    </div>
-  </form>
-</div>
-</main>
+<Router>
+  <Navbar />
+  <div class="container">
+    <Route path="/" component={Home} />
+    <Route path="/status" component={Status} />
+  </div>
+</Router>

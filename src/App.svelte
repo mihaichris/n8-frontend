@@ -4,12 +4,13 @@
   import Navbar from "./layout/Navbar.svelte";
   import Home from "./pages/Home.svelte";
   import Status from "./pages/Status.svelte";
+
+  export let url = "";
 </script>
 
-<Router>
+<Router url = "{url}">
   <Navbar />
-  <div class="container">
     <Route path="/" component={Home} />
     <Route path="/status" component={Status} />
-  </div>
+    <Route path="/"><Home /></Route>
 </Router>

@@ -3,6 +3,17 @@
   import AppCss from "../style/AppCss.svelte";
   import Search from "../components/Search.svelte";
   import Products from "../components/Products.svelte";
+  import DATA from '../data/Products.js';
+  import Autosuggest from "../components/Autosuggest.svelte";
+
+
+  export let location = '';
+  export let products = DATA.PRODUCTS;
+
+  function handleProducts(event) {
+    products = event.detail.products;
+  }
+
 </script>
 
 <TailwindCss />
@@ -16,12 +27,11 @@
     <div
       class="flex flex-col w-full md:w-2/5 justify-center items-start
       text-center md:text-left">
-      <p class="my-4 text-5xl font-bold leading-tight">
-        Motorul de căutare semantic al românului!
-      </p>
-      <!-- Search Bar-->
-      <Search />
-      <!-- Search Bar-->
+<!--      <p class="my-4 text-5xl font-bold leading-tight">-->
+<!--        Motorul de căutare semantic al românului!-->
+<!--      </p>-->
+      <Autosuggest/>
+      <Search on:search = {handleProducts}/>
 
     </div>
     <!--Right Col-->
@@ -35,7 +45,6 @@
 <div class="relative -mt-12 lg:-mt-24">
   <svg
     viewBox="0 0 1428 174"
-    version="1.1"
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -82,7 +91,7 @@
   </svg>
 </div>
 
-<section class="bg-white border-b py-8">
+<section class="bg-white py-8">
   <div class="container max-w-5xl mx-auto m-8">
     <h1
       class="w-full my-2 text-5xl font-bold leading-tight text-center
@@ -93,7 +102,8 @@
       <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t" />
     </div>
     <!-- Products Listing -->
-    <Products />
+    <Products items = {products} />
     <!-- Products Listing -->
   </div>
 </section>
+

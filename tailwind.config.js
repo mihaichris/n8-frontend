@@ -7,6 +7,8 @@ module.exports = {
     }),
     extend: {},
   },
-  variants: {},
+  variants: {
+    gridTemplateColumns: ['responsive', 'hover', 'focus'],
+  },
   plugins: [],
 }

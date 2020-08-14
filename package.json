@@ -13,13 +13,13 @@
     "@rollup/plugin-node-resolve": "^8.4.0",
     "postcss": "^7.0.32",
     "postcss-load-config": "^2.1.0",
-    "rollup": "^2.23.0",
+    "rollup": "^2.23.1",
     "rollup-plugin-livereload": "^1.0.0",
     "rollup-plugin-svelte": "^5.2.3",
-    "rollup-plugin-terser": "^5.1.2",
-    "svelte": "^3.24.0",
+    "rollup-plugin-terser": "^7.0.0",
+    "svelte": "^3.24.1",
     "svelte-preprocess": "^3.9.12",
-    "tailwindcss": "^1.5.2"
+    "tailwindcss": "^1.6.2"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.14.0",
@@ -27,6 +27,7 @@
     "sirv-cli": "^0.4.4",
     "svelte-awesome": "^2.3.0",
     "svelte-paginate": "0.0.1",
-    "svelte-routing": "^1.4.2"
+    "svelte-routing": "^1.4.2",
+    "svelte-spa-router": "2.0.0"
   }
 }

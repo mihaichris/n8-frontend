@@ -4,10 +4,4 @@ const SEARCH_REQUEST = SERVER_HOST + '/api/search';
 const SUGGEST_REQUEST = SERVER_HOST + '/api/suggest';
 const STATS_REQUEST = SERVER_HOST + '/api/stats';
 
-const REQUESTS = {
-    SEARCH_REQUEST,
-    SUGGEST_REQUEST,
-    STATS_REQUEST
-}
-
-export default REQUESTS;
+export  { SEARCH_REQUEST, SUGGEST_REQUEST, STATS_REQUEST};

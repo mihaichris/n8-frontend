@@ -1,19 +1,19 @@
 <script>
   import axios from "axios";
-  import Request from "../models/Request.js";
+  import {SEARCH_REQUEST, SUGGEST_REQUEST} from "../models/Request.js";
   import { createEventDispatcher } from "svelte";
-  import Products from "../components/Products.svelte";
+  import Resources from "../components/Resources.svelte";
 
   const dispatch = createEventDispatcher();
   let searchPhrase = "";
-  export let products = [];
+  export let resources = [];
 
-  async function getSearchProducts() {
+  async function getSearchResources() {
     try {
-      const products = await axios
+      const resources = await axios
         .get(SEARCH_REQUEST, {
           params: {
-            searchPrase: "test"
+            searchPhrase: "test"
           }
         })
         .then(function(response) {
@@ -28,7 +28,7 @@
     } catch (error) {
       console.log(error);
     }
-    return products;
+    return resources;
   }
 
   async function getSuggestProducts() {
@@ -36,7 +36,7 @@
       const suggests = await axios
         .get(SUGGEST_REQUEST, {
           params: {
-            searchPrase: "test"
+            searchPhrase: "test"
           }
         })
         .then(function(response) {
@@ -55,15 +55,15 @@
   }
 
   function search() {
-    products = getSearchProducts();
+    resources = getSearchResources();
 
     dispatch("search", {
-      products: products
+      products: resources
     });
   }
 
   function suggest() {
-    suggests = getSuggestProducts();
+    suggests = getSearchResources();
     dispatch("suggest", {
      suggests: suggests
     });

@@ -2,16 +2,16 @@
   import TailwindCss from "../style/TailwindCss.svelte";
   import AppCss from "../style/AppCss.svelte";
   import Search from "../components/Search.svelte";
-  import Products from "../components/Products.svelte";
-  import DATA from '../data/Products.js';
+  import Resources from "../components/Resources.svelte";
+  import DATA from '../data/Resources.js';
   import Autosuggest from "../components/Autosuggest.svelte";
 
 
   export let location = '';
-  export let products = DATA.PRODUCTS;
+  export let resources = DATA.RESOURCES;
 
-  function handleProducts(event) {
-    products = event.detail.products;
+  function handleResources(event) {
+    resources = event.detail.products;
   }
 
 </script>
@@ -31,7 +31,7 @@
 <!--        Motorul de căutare semantic al românului!-->
 <!--      </p>-->
       <Autosuggest/>
-      <Search on:search = {handleProducts}/>
+      <Search on:search = {handleResources}/>
 
     </div>
     <!--Right Col-->
@@ -96,14 +96,14 @@
     <h1
       class="w-full my-2 text-5xl font-bold leading-tight text-center
       text-gray-800">
-      Produse
+      Resources
     </h1>
     <div class="w-full mb-4">
       <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t" />
     </div>
-    <!-- Products Listing -->
-    <Products items = {products} />
-    <!-- Products Listing -->
+    <!-- Resources Listing -->
+    <Resources items = {resources} />
+    <!-- Resources Listing -->
   </div>
 </section>
 

@@ -1,5 +1,5 @@
 <script>
-import DATA from "../data/Products.js";
+import DATA from "../data/RESOURCES.js";
 import { onMount } from 'svelte';
 
 export let suggests = DATA.AUTOSUGGEST_KEYWORDS;

@@ -2,7 +2,7 @@
   import ResourceCard from "../components/ResourceCard.svelte";
   import { paginate, LightPaginationNav } from "svelte-paginate";
 
- export let items = [];
+ export let resources = [];
   let currentPage = 1;
   let pageSize = 4;
   // $: paginatedResources = paginate({ items, pageSize, currentPage });
@@ -10,9 +10,9 @@
 
 <div class="container">
   <div class="mx-10 pt-15">
-    {#if items.length !== 0}
+    {#if resources.length !== 0}
       <div class="grid gap-6 mb-8 md:grid-cols-1">
-        {#each items as resource}
+        {#each resources as resource}
           <ResourceCard {resource} />
         {/each}
       </div>

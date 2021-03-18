@@ -10,7 +10,7 @@ background-color: rgba(254, 242, 242, var(--tw-bg-opacity));">
       <span class="transition duration-500 ease-in-out transform font-bold
         hover:-translate-y-1 hover:scale-11 text-lg block mt-4 lg:inline-block
         lg:mt-0 text-orange-600 hover:text-white mr-4">
-          {resource.id}
+          {resource["@id"]}
       </span>
     </NavLink>
 </div>

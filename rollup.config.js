@@ -24,7 +24,7 @@ export default {
 			// a separate file - better for performance
 			preprocess: sveltePreprocess({ postcss: true }),
 			css: css => {
-				css.write('public/build/bundle.css');
+				css.write('bundle.css');
 			}
 		}),
 
@@ -57,18 +57,22 @@ export default {
 };
 
 function serve() {
-	let started = false;
+	let server;
+
+	function toExit() {
+		if (server) server.kill(0);
+	}
 
 	return {
 		writeBundle() {
-			if (!started) {
-				started = true;
+			if (server) return;
+			server = require('child_process').spawn('npm', ['run', 'start', '--', '--dev'], {
+				stdio: ['ignore', 'inherit', 'inherit'],
+				shell: true
+			});
 
-				require('child_process').spawn('npm', ['run', 'start', '--', '--dev'], {
-					stdio: ['ignore', 'inherit', 'inherit'],
-					shell: true
-				});
-			}
+			process.on('SIGTERM', toExit);
+			process.on('exit', toExit);
 		}
 	};
 }

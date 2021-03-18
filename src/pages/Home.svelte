@@ -11,15 +11,17 @@
   export let resources = DATA.RESOURCES;
 
   function handleResources(event) {
-    resources = event.detail.products;
+    resources = event.detail.resources;
   }
 
 </script>
 
 <TailwindCss />
 <AppCss />
-<div class="pt-56">
+<div class="pt-44">
 
+
+  <Search on:search = {handleResources}/>
   <div
     class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row
     items-center">
@@ -28,11 +30,9 @@
       class="flex flex-col w-full md:w-2/5 justify-center items-start
       text-center md:text-left">
 <!--      <p class="my-4 text-5xl font-bold leading-tight">-->
-<!--        Motorul de căutare semantic al românului!-->
+<!--        Motorul de căutare pentru ontologi!-->
 <!--      </p>-->
-      <Autosuggest/>
-      <Search on:search = {handleResources}/>
-
+      <Autosuggest on:sele/>
     </div>
     <!--Right Col-->
     <div class="w-full md:w-3/5 py-6 text-center">
@@ -42,7 +42,7 @@
   </div>
 
 </div>
-<div class="relative -mt-12 lg:-mt-24">
+<div class="relative -mt-12 lg:mt-0.5">
   <svg
     viewBox="0 0 1428 174"
     xmlns="http://www.w3.org/2000/svg"
@@ -96,13 +96,13 @@
     <h1
       class="w-full my-2 text-5xl font-bold leading-tight text-center
       text-gray-800">
-      Resources
+      Resurse
     </h1>
     <div class="w-full mb-4">
       <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t" />
     </div>
     <!-- Resources Listing -->
-    <Resources items = {resources} />
+    <Resources resources = {resources} />
     <!-- Resources Listing -->
   </div>
 </section>

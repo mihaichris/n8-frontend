@@ -55,14 +55,14 @@
     background-color: transparent;
   }
 
-  #cover {
-    position: absolute;
+  #search-bar {
+    position: relative;
     top: 25%;
     left: 0;
     right: 0;
     width: 2000px;
     padding: 35px;
-    margin: -83px auto 0 auto;
+    margin: -10em auto 0 auto;
     background-color: #ffac75;
     border-radius: 20px;
     box-shadow: 0 10px 40px #ffbb7c, 0 0 0 20px #ffffffeb;

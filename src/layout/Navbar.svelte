@@ -6,7 +6,7 @@
 
 <nav class="rounded flex items-center justify-between flex-wrap p-6">
   <div class="flex items-center flex-shrink-0 text-white mr-6">
-    <span class="font-semibold text-xl tracking-tight text-orange-600">N8</span>
+    <NavLink to="/"><span class="font-semibold text-xl tracking-tight text-yellow-700">N8</span></NavLink>
   </div>
   <div class="text-sm lg:flex-grow">
     <NavLink to="/">

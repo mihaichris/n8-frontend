@@ -4,7 +4,6 @@
   import Search from "../components/Search.svelte";
   import Resources from "../components/Resources.svelte";
   import DATA from '../data/Resources.js';
-  import Autosuggest from "../components/Autosuggest.svelte";
 
 
   export let location = '';
@@ -19,28 +18,7 @@
 <TailwindCss />
 <AppCss />
 <div class="pt-44">
-
-
   <Search on:search = {handleResources}/>
-  <div
-    class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row
-    items-center">
-    <!--Left Col-->
-    <div
-      class="flex flex-col w-full md:w-2/5 justify-center items-start
-      text-center md:text-left">
-<!--      <p class="my-4 text-5xl font-bold leading-tight">-->
-<!--        Motorul de căutare pentru ontologi!-->
-<!--      </p>-->
-      <Autosuggest on:sele/>
-    </div>
-    <!--Right Col-->
-    <div class="w-full md:w-3/5 py-6 text-center">
-      <!-- <img class="w-full md:w-4/5 z-50" src="hero.png"> -->
-    </div>
-
-  </div>
-
 </div>
 <div class="relative -mt-12 lg:mt-0.5">
   <svg
@@ -91,15 +69,15 @@
   </svg>
 </div>
 
-<section class="bg-white py-8">
-  <div class="container max-w-5xl mx-auto m-8">
+<section class="bg-white py-4">
+  <div class="container max-w-10xl mx-auto m-8">
     <h1
       class="w-full my-2 text-5xl font-bold leading-tight text-center
       text-gray-800">
       Resurse
     </h1>
     <div class="w-full mb-4">
-      <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t" />
+      <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
     </div>
     <!-- Resources Listing -->
     <Resources resources = {resources} />

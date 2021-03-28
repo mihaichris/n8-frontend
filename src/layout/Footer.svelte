@@ -1,5 +1,5 @@
 <section class="bg-white " id="footer">
-  <div class="container mx-auto px-8" />
+  <div class="container mx-auto px-8"></div>
 
 </section>
 

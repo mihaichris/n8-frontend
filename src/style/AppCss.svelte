@@ -106,8 +106,7 @@
     height: 43px;
     margin-top: 0;
     border-width: 15px;
-    border: 15px solid #fff;
-    background-color: transparent;
+      background-color: transparent;
     border-radius: 50%;
     transition: 0.5s ease all;
   }

@@ -3,19 +3,20 @@
     import AppCss from "../style/AppCss.svelte";
     import {onMount} from "svelte";
     import axios from "axios";
-    import {SEARCH_REQUEST} from "../models/Request";
+    import {RESOURCE_REQUEST, SEARCH_REQUEST} from "../models/Request";
 
     export let id;
+    export let resource;
     onMount(() => {
         console.log(id);
-        let resource = findEntityBySubjectUri(id);
+        findEntityBySubjectUri(id).then((response) => {
+            resource = response.data;
+        });
     });
 
     const findEntityBySubjectUri = async (subjectUri) => {
         try {
-            return await axios.post(SEARCH_REQUEST, {
-                subjectUri
-            });
+            return await axios.get(RESOURCE_REQUEST + "/" + subjectUri);
         } catch (error) {
             console.log(error);
         }
@@ -27,7 +28,7 @@
         <div class="w-full max-w-6xl rounded bg-white shadow-xl p-10 lg:p-20 mx-auto text-gray-800 relative md:text-left">
         </div>
 
-        <!-- BUY ME A BEER AND HELP SUPPORT OPEN-SOURCE RESOURCES -->
+
         <div class="flex items-end justify-end fixed bottom-0 right-0 mb-4 mr-4 z-10">
             <div>
                 <a title="Go to actual resource" href="{id}" target="_blank"

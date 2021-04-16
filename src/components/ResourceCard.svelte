@@ -7,6 +7,7 @@
     let subjectUri;
     let subjectScore;
     let subjectGraph;
+    let subjectType;
     let values = [];
     onMount(() => {
         encodedSubjectUri = encodeURIComponent(resource["@id"]);
@@ -20,6 +21,7 @@
             };
             values.push(valueAndAttribute);
         })
+        subjectType = resource["@id"].split('.').pop() === "owl" ? "Ontologie" : "Resursă";
     });
 </script>
 
@@ -27,8 +29,11 @@
 {#each values as value}
     <div class="min-w-0 p-4 text-gray-800 rounded-lg shadow-xs" style="	--tw-bg-opacity: 1;
 background-color: rgba(254, 242, 242, var(--tw-bg-opacity));">
-        <div class="grid grid-cols-3 gap-4">
-            <div class="text-center">
+        <div class="grid grid-cols-12 gap-8">
+            <div class="text-center p-4">
+                <span class="font-bold text-yellow-700">{subjectType}</span>
+            </div>
+            <div class="text-center col-span-4 p-4">
                 <NavLink to="/resource/{encodedSubjectUri}">
                   <span class="transition duration-500 ease-in-out transform font-bold
                     hover:-translate-y-1 hover:scale-11 text-lg block mt-4 lg:inline-block
@@ -37,18 +42,15 @@ background-color: rgba(254, 242, 242, var(--tw-bg-opacity));">
                   </span>
                 </NavLink>
             </div>
-            <div class="text-center">
+            <div class="text-center  col-span-2  p-4">
                 <span class="text-yellow-700">{value.attribute}</span>
             </div>
-            <div class="text-center">
+            <div class="text-center col-span-2 p-4">
                 <span class="text-yellow-700">{value.id}</span>
             </div>
-<!--            <div>-->
-<!--                {subjectScore}-->
-<!--            </div>-->
-<!--            <div>-->
-<!--                {subjectGraph}-->
-<!--            </div>-->
+            <div class="text-center col-span-2 p-4">
+                <span class="text-yellow-700">{subjectScore}</span>
+            </div>
         </div>
 
     </div>

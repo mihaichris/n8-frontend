@@ -9,21 +9,29 @@
 </script>
 
 <div class="container">
-    <div class="mx-10 pt-15">
+    <div class="md:-ml-44 md:-mr-44 pt-15">
         {#if resources.length !== 0}
-            <div class="grid gap-6 mb-8 md:grid-cols-1">
-                <div class="grid grid-cols-3 gap-4">
-                    <div class="min-w-0 text-gray-800 shadow-xs font-semibold p-0 text-2xl text-center"
+            <div class=" grid gap-1 mb-8 md:grid-cols-1">
+                <div class="grid grid-cols-12 gap-8">
+                    <div class=" p-4 min-w-0 text-gray-800 shadow-xs font-semibold text-2xl text-center"
+                         style="--tw-bg-opacity: 1">
+                        Tip
+                    </div>
+                    <div class="col-span-4 p-4 min-w-0 text-gray-800 shadow-xs font-semibold text-2xl text-center"
                          style="--tw-bg-opacity: 1">
                         Entitate
                     </div>
-                    <div class="min-w-0 text-gray-800 shadow-xs font-semibold p-0 text-2xl text-center"
+                    <div class="col-span-2  p-4 min-w-0 text-gray-800 shadow-xs font-semibold text-2xl text-center"
                          style="--tw-bg-opacity: 1">
                         Atribut
                     </div>
-                    <div class="min-w-0 text-gray-800 shadow-xs font-semibold p-0 text-2xl text-center"
+                    <div class="col-span-2 p-4 min-w-0 text-gray-800 shadow-xs font-semibold text-2xl text-center"
                          style="--tw-bg-opacity: 1">
                         Valoare
+                    </div>
+                    <div class="col-span-2 p-4 min-w-0 text-gray-800 shadow-xs font-semibold text-2xl text-center"
+                         style="--tw-bg-opacity: 1">
+                        Scor
                     </div>
                 </div>
                 {#each resources as resource}

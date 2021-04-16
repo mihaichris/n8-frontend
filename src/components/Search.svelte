@@ -3,13 +3,29 @@
     import {SEARCH_REQUEST, SUGGEST_REQUEST} from "../models/Request.js";
     import {createEventDispatcher, onMount} from "svelte";
     import DATA from "../data/Resources";
+    import Select from 'svelte-select';
 
     const dispatch = createEventDispatcher();
     let searchPhrase = "";
     export let resources = [];
-
+    let responseTime = 0;
+    let selectedLanguage = '';
+    let onlyOntologies = false;
+    const supportedLanguages = [
+        {value: '', label: 'Detectare automată'},
+        {value: 'en', label: 'Engliză'},
+        {value: 'es', label: 'Spaniolă'},
+        {value: 'de', label: 'Germană'},
+        {value: 'fr', label: 'Franceză'},
+        {value: 'it', label: 'Italiană'}
+    ];
     onMount(() => {
         let suggests = DATA.AUTOSUGGEST_KEYWORDS;
+        buildSuggestionPills(suggests);
+    })
+
+    function buildSuggestionPills(suggests) {
+        document.getElementById('suggests').innerHTML = "";
         suggests.forEach(suggest => {
             var id = "suggest-" + suggest.replace(' ', '-');
             var html = "<a  href='#" + suggest + "' id='" + id + "' class='suggestion bg-yellow-100 rounded-full  text-gray-700 text-center px-4 py-2 mr-4'>" + suggest + "</a>";
@@ -19,7 +35,7 @@
         for (let i = 0; i < suggestionElements.length; i++) {
             suggestionElements[i].addEventListener('click', selectSuggestion, false);
         }
-    })
+    }
 
     function selectSuggestion(event) {
         searchPhrase = event.target.firstChild.nodeValue;
@@ -28,9 +44,10 @@
     const getSearchResources = async () => {
         try {
             return await axios.post(SEARCH_REQUEST, {
-                    searchQuery: searchPhrase,
-                    searchType: "RESOURCE"
-                });
+                searchQuery: searchPhrase,
+                searchType: onlyOntologies ? "DOCUMENT" : "RESOURCE",
+                language: selectedLanguage
+            });
         } catch (error) {
             console.log(error);
         }
@@ -39,13 +56,9 @@
     async function getSuggestKeywords() {
         try {
             const suggests = await axios
-                .get(SUGGEST_REQUEST, {
-                    params: {
-                        searchPhrase: "test"
-                    }
-                })
+                .get(SUGGEST_REQUEST + "/" + searchPhrase)
                 .then(function (response) {
-                    console.log(response);
+                    buildSuggestionPills(response.data)
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -53,32 +66,34 @@
         } catch (error) {
             console.log(error);
         }
-        return suggests;
+    }
+
+    function dispatchSearching() {
+        dispatch("search", {
+            resources: resources
+        });
     }
 
     function search() {
-        if (searchPhrase === "") {
-            resources = [] ;
+        if (searchPhrase.length <= 2) {
+            resources = [];
         } else {
+            const ajaxTime = new Date().getTime();
             getSearchResources().then((response) => {
                 resources = response.data;
-                dispatch("search", {
-                    resources: resources
-                });
+                responseTime = new Date().getTime() - ajaxTime;
+                dispatchSearching();
             });
         }
     }
 
-    function suggest() {
-        let suggests = getSuggestKeywords();
-        dispatch("suggest", {
-            suggests: suggests
-        });
+    function onSelectLanguage(event) {
+        selectedLanguage = event.detail.value;
     }
 
     const onKeyPress = event => {
         if (event.key === 'Enter') search();
-        //suggest();
+        if (searchPhrase.length > 2) getSuggestKeywords();
     };
 
 </script>
@@ -108,10 +123,26 @@
     <div
             class="flex flex-col w-full md:w-2/5 justify-center items-start
       text-center md:text-left">
-        <div id = "suggests" class="bg-gray-200">
+        <div id="suggests" class="bg-gray-200">
         </div>
+
     </div>
     <!--Right Col-->
-    <div class="w-full md:w-3/5 py-6 text-center">
+    <div class="w-full md:w-3/5 py-4 text-center">
+        <div class="container mx-auto flex flex-wrap flex-row md:text-right">
+            <div class="box-content h-5 w-32 px-4 py-2 mr-4 bg-yellow-100 rounded-3xl flex-auto">
+                <div class="text-center"><span class="text-yellow-700 shadow-xs font-semibold">Doar Ontologii:</span> <input type=checkbox bind:checked={onlyOntologies}></div>
+            </div>
+            <div class="box-content h-5 w-32 rounded-3xl flex-auto">
+                <div class="text-center"><span class="text-yellow-700 shadow-xs font-semibold"></span><Select placeholder="Limbă rezultate..." containerClasses=" rounded-3xl  font-semibold text-yellow-700" items={supportedLanguages} on:select={onSelectLanguage}></Select></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container mx-auto flex flex-wrap flex-col md:flex-row items-center">
+    <div class="box-content h-32 w-32 p-4 bg-yellow-100 rounded-3xl">
+        <p class="text-gray-700 shadow-xs font-semibold text-2xl text-center">Timp Răspuns</p>
+        <p class="text-yellow-700 shadow-xs font-semibold text-2xl text-center">{responseTime}</p>
+        <p class="text-gray-700 shadow-xs font-semibold text-2xl text-center">milisecunde</p>
     </div>
 </div>

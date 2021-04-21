@@ -9,7 +9,8 @@
     let searchPhrase = "";
     export let resources = [];
     let responseTime = 0;
-    let selectedLanguage = '';
+    let defaultSelectValue = {value: 'en', label: 'Engleză'};
+    let selectedLanguage = 'en';
     let onlyOntologies = false;
     const supportedLanguages = [
         {value: '', label: 'Detectare automată'},
@@ -76,15 +77,21 @@
 
     function search() {
         if (searchPhrase.length <= 2) {
-            resources = [];
+            clearResults();
         } else {
+            clearResults();
             const ajaxTime = new Date().getTime();
             getSearchResources().then((response) => {
-                resources = response.data;
+                resources = sortResources(response.data);
                 responseTime = new Date().getTime() - ajaxTime;
                 dispatchSearching();
             });
         }
+    }
+
+    function clearResults() {
+        resources = [];
+        dispatchSearching();
     }
 
     function onSelectLanguage(event) {
@@ -95,6 +102,15 @@
         if (event.key === 'Enter') search();
         if (searchPhrase.length > 2) getSuggestKeywords();
     };
+
+    function sortResources(resources) {
+        function compareScores(a, b) {
+            const aScore = parseFloat(a["n:values"][0]["n:score"].replace(/\^(.*)/gm, ""));
+            const bScore = parseFloat(b["n:values"][0]["n:score"].replace(/\^(.*)/gm, ""));
+            return bScore-aScore;
+        }
+        return resources.sort(compareScores);
+    }
 
 </script>
 
@@ -134,7 +150,7 @@
                 <div class="text-center"><span class="text-yellow-700 shadow-xs font-semibold">Doar Ontologii:</span> <input type=checkbox bind:checked={onlyOntologies}></div>
             </div>
             <div class="box-content h-5 w-32 rounded-3xl flex-auto">
-                <div class="text-center"><span class="text-yellow-700 shadow-xs font-semibold"></span><Select placeholder="Limbă rezultate..." containerClasses=" rounded-3xl  font-semibold text-yellow-700" items={supportedLanguages} on:select={onSelectLanguage}></Select></div>
+                <div class="text-center"><span class="text-yellow-700 shadow-xs font-semibold"></span><Select placeholder="Limbă rezultate..." selectedValue={defaultSelectValue} containerClasses=" rounded-3xl  font-semibold text-yellow-700" items={supportedLanguages} on:select={onSelectLanguage}></Select></div>
             </div>
         </div>
     </div>

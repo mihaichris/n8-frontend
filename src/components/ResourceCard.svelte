@@ -12,16 +12,33 @@
     onMount(() => {
         encodedSubjectUri = encodeURIComponent(resource["@id"]);
         subjectUri = resource["@id"];
-        subjectScore = resource["n:score"];
         subjectGraph = resource["n:graph"];
         resource["n:values"].forEach(value => {
             const valueAndAttribute = {
                 attribute: value["n:attribute"]["@id"],
-                id: value["@id"]
+                id: value["@id"],
+                score: value["n:score"]
             };
             values.push(valueAndAttribute);
         })
-        subjectType = resource["@id"].split('.').pop() === "owl" ? "Ontologie" : "Resursă";
+        subjectType = () => {
+            if (isOntology()) {
+                return "Ontologie";
+            } else if(isProperty()) {
+                return "Proprietate";
+            } else {
+                return "Resursă";
+            }
+        }
+
+        function isOntology() {
+            const entity = resource["@id"];
+            return (entity.includes("ontolog") || entity.split('.').pop() === "owl") && !entity.includes("#");
+        }
+        function isProperty() {
+            const entity = resource["@id"];
+            return entity.includes("property")  || entity.includes("#")
+        }
     });
 </script>
 
@@ -31,7 +48,7 @@
 background-color: rgba(254, 242, 242, var(--tw-bg-opacity));">
         <div class="grid grid-cols-12 gap-8">
             <div class="text-center p-4">
-                <span class="font-bold text-yellow-700">{subjectType}</span>
+                <span class="font-bold text-yellow-700">{value.id.includes("onto") ? "Ontologie" : subjectType()}</span>
             </div>
             <div class="text-center col-span-4 p-4">
                 <NavLink to="/resource/{encodedSubjectUri}">
@@ -49,7 +66,7 @@ background-color: rgba(254, 242, 242, var(--tw-bg-opacity));">
                 <span class="text-yellow-700">{value.id}</span>
             </div>
             <div class="text-center col-span-2 p-4">
-                <span class="text-yellow-700">{subjectScore}</span>
+                <span class="text-yellow-700">{value.score}</span>
             </div>
         </div>
 

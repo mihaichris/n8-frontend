@@ -34,9 +34,11 @@
                         Scor
                     </div>
                 </div>
+                <div id="resource-list">
                 {#each resources as resource}
                     <ResourceCard {resource}/>
                 {/each}
+                </div>
             </div>
             <!--    <LightPaginationNav-->
             <!--      totalItems={items.length}-->

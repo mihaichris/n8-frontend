@@ -105,11 +105,26 @@
 
     function sortResources(resources) {
         function compareScores(a, b) {
-            const aScore = parseFloat(a["n:values"][0]["n:score"].replace(/\^(.*)/gm, ""));
-            const bScore = parseFloat(b["n:values"][0]["n:score"].replace(/\^(.*)/gm, ""));
-            return bScore-aScore;
+            let aValues = a["n:values"];
+            let bValues = b["n:values"];
+            if (aValues.length > 0) {
+                aValues = aValues.sort(sortValues);
+            }
+            if (bValues.length > 0) {
+                bValues = bValues.sort(sortValues);
+            }
+            const aScore = parseFloat(aValues[0]["n:score"].replace(/\^(.*)/gm, ""));
+            const bScore = parseFloat(bValues[0]["n:score"].replace(/\^(.*)/gm, ""));
+            return bScore - aScore;
         }
+
         return resources.sort(compareScores);
+    }
+
+    function sortValues(a, b) {
+        const aScore = parseFloat(a["n:score"].replace(/\^(.*)/gm, ""));
+        const bScore = parseFloat(b["n:score"].replace(/\^(.*)/gm, ""));
+        return bScore - aScore;
     }
 
 </script>
@@ -147,10 +162,14 @@
     <div class="w-full md:w-3/5 py-4 text-center">
         <div class="container mx-auto flex flex-wrap flex-row md:text-right">
             <div class="box-content h-5 w-32 px-4 py-2 mr-4 bg-yellow-100 rounded-3xl flex-auto">
-                <div class="text-center"><span class="text-yellow-700 shadow-xs font-semibold">Doar Ontologii:</span> <input type=checkbox bind:checked={onlyOntologies}></div>
+                <div class="text-center"><span class="text-yellow-700 shadow-xs font-semibold">Doar Ontologii:</span>
+                    <input type=checkbox bind:checked={onlyOntologies}></div>
             </div>
             <div class="box-content h-5 w-32 rounded-3xl flex-auto">
-                <div class="text-center"><span class="text-yellow-700 shadow-xs font-semibold"></span><Select placeholder="Limbă rezultate..." selectedValue={defaultSelectValue} containerClasses=" rounded-3xl  font-semibold text-yellow-700" items={supportedLanguages} on:select={onSelectLanguage}></Select></div>
+                <div class="text-center"><span class="text-yellow-700 shadow-xs font-semibold"></span><Select
+                        placeholder="Limbă rezultate..." selectedValue={defaultSelectValue}
+                        containerClasses=" rounded-3xl  font-semibold text-yellow-700" items={supportedLanguages}
+                        on:select={onSelectLanguage}></Select></div>
             </div>
         </div>
     </div>

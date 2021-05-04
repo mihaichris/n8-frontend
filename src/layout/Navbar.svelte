@@ -17,14 +17,14 @@
         Acasă
       </span>
     </NavLink>
-    <NavLink to="status">
-      <span
-        class="transition duration-500 ease-in-out transform
-        hover:-translate-y-1 hover:scale-11 text-lg block mt-4 lg:inline-block
-        lg:mt-0 text-orange-600 hover:text-white mr-4">
-        Status
-      </span>
-    </NavLink>
+<!--    <NavLink to="status">-->
+<!--      <span-->
+<!--        class="transition duration-500 ease-in-out transform-->
+<!--        hover:-translate-y-1 hover:scale-11 text-lg block mt-4 lg:inline-block-->
+<!--        lg:mt-0 text-orange-600 hover:text-white mr-4">-->
+<!--        Status-->
+<!--      </span>-->
+<!--    </NavLink>-->
   </div>
   <div>
     <a href="https://github.com/mihaichris/n8-frontend">

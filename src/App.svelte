@@ -12,7 +12,7 @@
 <Router url = "{url}">
   <Navbar />
     <Route path="/" component={Home} />
-    <Route path="/status" component={Status} />
+<!--    <Route path="/status" component={Status} />-->
     <Route path="/"><Home /></Route>
     <Route path="/resource/:id" component={Resource} />
 </Router>

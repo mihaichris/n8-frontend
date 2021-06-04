@@ -24,20 +24,51 @@
         subjectType = () => {
             if (isOntology()) {
                 return "Ontologie";
+            } else if(isClass()) {
+                return "Clasă";
             } else if(isProperty()) {
                 return "Proprietate";
             } else {
                 return "Resursă";
             }
         }
-
         function isOntology() {
             const entity = resource["@id"];
             return (entity.includes("ontolog") || entity.split('.').pop() === "owl") && !entity.includes("#");
         }
         function isProperty() {
             const entity = resource["@id"];
-            return entity.includes("property")  || entity.includes("#")
+            const isAProperty = () => {
+                if (!entity.includes("#")) {
+                    return false;
+                } else {
+                    const lastWord = entity.split("#").pop();
+                    const firstChar = lastWord.charAt(0);
+                    if (firstChar === firstChar.toLowerCase()) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+            return entity.includes("property")  || isAProperty()
+        }
+        function isClass() {
+            const entity = resource["@id"];
+            const isAClass = () => {
+                if (!entity.includes("#")) {
+                    return false;
+                } else {
+                    const lastWord = entity.split("#").pop();
+                    const firstChar = lastWord.charAt(0);
+                    if (firstChar === firstChar.toUpperCase()) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+            return entity.includes("class")  || (isAClass())
         }
     });
 </script>

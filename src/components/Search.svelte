@@ -29,7 +29,7 @@
         document.getElementById('suggests').innerHTML = "";
         suggests.forEach(suggest => {
             var id = "suggest-" + suggest.replace(' ', '-');
-            var html = "<a  href='#" + suggest + "' id='" + id + "' class='suggestion bg-yellow-100 rounded-full  text-gray-700 text-center px-4 py-2 mr-4'>" + suggest + "</a>";
+            var html = "<a  href='#" + suggest + "' id='" + id + "' class='suggestion bg-yellow-100 rounded-full text-lg text-gray-700 text-center px-4 py-2 mr-4'>" + suggest + "</a>";
             document.getElementById('suggests').innerHTML += html;
         });
         const suggestionElements = document.getElementsByClassName("suggestion");
@@ -57,7 +57,7 @@
     async function getSuggestKeywords() {
         try {
             const suggests = await axios
-                .get(SUGGEST_REQUEST + "/" + searchPhrase)
+                .get(SUGGEST_REQUEST + "/" + searchPhrase + " ")
                 .then(function (response) {
                     buildSuggestionPills(response.data)
                 })
@@ -133,6 +133,7 @@
     <div class="tb">
         <div class="td">
             <input id="search-input"
+                   autocomplete="off"
                    on:keypress={onKeyPress}
                    type="text"
                    placeholder="Caută"
@@ -166,7 +167,7 @@
                     <input type=checkbox autocomplete="off" bind:checked={onlyOntologies}></div>
             </div>
             <div class="box-content h-5 w-32 rounded-3xl flex-auto">
-                <div class="text-center"><span class="text-yellow-700 shadow-xs font-semibold"></span><Select
+                <div class="text-center"><span class="text-yellow-700  shadow-xs font-semibold"></span><Select
                         placeholder="Limbă rezultate..." selectedValue={defaultSelectValue}
                         containerClasses=" rounded-3xl  font-semibold text-yellow-700" items={supportedLanguages}
                         on:select={onSelectLanguage}></Select></div>

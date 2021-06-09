@@ -94,7 +94,7 @@ background-color: rgba(254, 242, 242, var(--tw-bg-opacity));">
                 <span class="text-yellow-700">{value.attribute}</span>
             </div>
             <div class="text-center col-span-2 p-4">
-                <span class="text-yellow-700">{value.id}</span>
+                <span class="text-yellow-700">{@html value.id}</span>
             </div>
             <div class="text-center col-span-2 p-4">
                 <span class="text-yellow-700">{value.score}</span>

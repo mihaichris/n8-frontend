@@ -163,13 +163,13 @@
     <div class="w-full md:w-3/5 py-4 text-center">
         <div class="container mx-auto flex flex-wrap flex-row md:text-right">
             <div class="box-content h-5 w-32 px-4 py-2 mr-4 bg-yellow-100 rounded-3xl flex-auto">
-                <div class="text-center"><span class="text-yellow-700 shadow-xs font-semibold">Doar Ontologii:</span>
+                <div class="text-center"><span class="text-yellow-700 shadow-xs text-lg font-semibold">Doar Ontologii:</span>
                     <input type=checkbox autocomplete="off" bind:checked={onlyOntologies}></div>
             </div>
             <div class="box-content h-5 w-32 rounded-3xl flex-auto">
                 <div class="text-center"><span class="text-yellow-700  shadow-xs font-semibold"></span><Select
                         placeholder="Limbă rezultate..." selectedValue={defaultSelectValue}
-                        containerClasses=" rounded-3xl  font-semibold text-yellow-700" items={supportedLanguages}
+                        containerClasses=" rounded-3xl  font-semibold text-yellow-700 text-lg" items={supportedLanguages}
                         on:select={onSelectLanguage}></Select></div>
             </div>
         </div>

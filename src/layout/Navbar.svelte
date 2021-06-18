@@ -6,7 +6,7 @@
 
 <nav class="rounded flex items-center justify-between flex-wrap p-6">
   <div class="flex items-center flex-shrink-0 text-white mr-6">
-    <NavLink to="/"><span class="font-semibold text-2xl tracking-tight text-yellow-700">N8</span></NavLink>
+    <NavLink to="/"><span class="font-semibold text-5xl tracking-tight text-yellow-700">N8</span></NavLink>
   </div>
   <div class="text-sm lg:flex-grow">
     <!-- <NavLink to="/">
@@ -27,11 +27,11 @@
 <!--    </NavLink>-->
   </div>
   <div>
-    <a href="https://github.com/mihaichris/n8-frontend">
+    <a target="_black" href="https://github.com/mihaichris/n8-frontend">
       <Icon
         class="transition duration-500 ease-in-out transform
         hover:-translate-y-1 hover:scale-110 text-orange-600 block flex
-        items-center hover:text-white mr-5"
+        items-center hover:text-white mr-5 font-xl" 
         data={github}
         scale="2" />
     </a>

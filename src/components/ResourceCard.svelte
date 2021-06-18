@@ -79,9 +79,9 @@
 background-color: rgba(254, 242, 242, var(--tw-bg-opacity));">
         <div class="grid grid-cols-12 gap-8">
             <div class="text-center p-4">
-                <span class="font-bold text-yellow-700">{value.id.includes("onto") ? "Ontologie" : subjectType()}</span>
+                <span class="font-bold text-yellow-700 text-xl">{value.id.includes("onto") ? "Ontologie" : subjectType()}</span>
             </div>
-            <div class="text-center col-span-4 p-4">
+            <div class="text-center col-span-4 p-4 ">
                 <NavLink to="/resource/{encodedSubjectUri}">
                   <span class="transition duration-500 ease-in-out transform font-bold
                     hover:-translate-y-1 hover:scale-11 text-lg block mt-4 lg:inline-block
@@ -91,13 +91,13 @@ background-color: rgba(254, 242, 242, var(--tw-bg-opacity));">
                 </NavLink>
             </div>
             <div class="text-center  col-span-2  p-4">
-                <span class="text-yellow-700">{value.attribute}</span>
+                <span class="text-yellow-700 text-lg">{value.attribute}</span>
             </div>
             <div class="text-center col-span-2 p-4">
-                <span class="text-yellow-700">{@html value.id}</span>
+                <span class="text-yellow-700 text-lg">{@html value.id}</span>
             </div>
             <div class="text-center col-span-2 p-4">
-                <span class="text-yellow-700">{value.score}</span>
+                <span class="text-yellow-700 text-lg">{value.score}</span>
             </div>
         </div>
 
